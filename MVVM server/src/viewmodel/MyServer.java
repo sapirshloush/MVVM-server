@@ -4,23 +4,30 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MyServer
+import model.Model;
+
+public class MyServer extends Observable implements Observer,Viewmodel
 {
 	private int port;
 	private ClientHandler ch;
 	private volatile boolean stop;
 	private ExecutorService executor;
+	private Model model;
 	
-	
-	public MyServer(int port,ClientHandler ch) 
+	public MyServer(int port,ClientHandler ch,Model model) 
 	{
 		this.port = port;
 		this.ch = ch;
 		stop = false;
+		this.model=model;
 		executor = Executors.newCachedThreadPool();
+		
+		
 	}
 	
 	private void runServer() throws Exception 
@@ -61,6 +68,12 @@ public class MyServer
 	public void stop()
 	{
 		stop = true;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

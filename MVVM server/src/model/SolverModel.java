@@ -1,18 +1,19 @@
 package model;
 
 import java.util.LinkedList;
+import java.util.Observable;
 
 import stripsLib.Action;
 import stripsLib.Plannable;
 import stripsLib.Planner;
 
-public class SolverModel {
+public class SolverModel extends Observable implements Model{
 
 	
-	private static Planner planner;
-	private static Plannable plannable;
+	private Planner planner;
+	private Plannable plannable;
 	
-	public static LinkedList<Action> createPlan(Plannable plannable,Planner planner)
+	public  LinkedList<Action> createPlan(Plannable plannable,Planner planner)
 	{
 		
 		return planner.buildPlan(plannable);
